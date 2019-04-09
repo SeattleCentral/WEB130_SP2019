@@ -38,4 +38,22 @@ main h1 {
   color: #4c7572;
 }
 
+article {
+  color: #FFF;
+  font-size: 2.2em;
+  text-align: right;
+}
+@media screen and (max-width: 39.99em) {
+  article {
+    text-align: left;
+    font-size: 1.3em;
+  }
+}
+@media screen and (min-width: 40em) and (max-width: 63.99em) {
+  article {
+    text-align: center;
+    font-size: 2em;
+  }
+}
+
 /*# sourceMappingURL=main.css.map */

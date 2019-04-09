@@ -1,0 +1,50 @@
+$sm: 400px
+$md: 800px
+$lg: 1100px
+
+body
+    font-family:  'Inconsolata', monospace
+    color: #333
+
+main
+    width: calc(100% - 20px)
+    margin: 10px
+    @media screen and (min-width: $lg)
+        width: calc(100% - 32px)
+        max-width: 1000px
+        margin: 16px auto
+    h1
+        span
+            white-space: nowrap
+        em
+            display: inline-block
+            font-style: normal
+            &:first-child
+                // j
+                padding: 1px 3px 2px 5px
+            padding: 1px 3px 2px
+            border: 1px solid #333
+            margin-right: 1px
+    p
+        font-size: 1.1rem
+        line-height: 1.2
+        @media screen and (min-width: $md)
+            font-size: 1.3rem
+            
+    h2
+        text-decoration: underline
+        
+    img
+        box-sizing: border-box
+        max-width: 100%
+        padding: 10px
+        @media screen and (min-width: $md) and (max-width: $lg - 1)
+            padding: 0 10px
+            max-width: 50%
+        @media screen and (min-width: $lg)
+            padding: 0 16px
+            max-width: 40%
+            
+    br
+        @media screen and (max-width: $md)
+            display: none

@@ -1,0 +1,17 @@
+@import 'sizer';
+
+article {
+    section {
+        p:first-child {
+            margin-top: 0;
+        }
+        column-count: 1;
+        @include sizer(medium) {
+            column-count: 3;
+        }
+        @include sizer(large) {
+            column-count: 4;
+        }
+    }
+}
+        

@@ -1,0 +1,18 @@
+article section {
+  column-count: 1;
+}
+article section p:first-child {
+  margin-top: 0;
+}
+@media screen and (min-width: 40em) and (max-width: 63.99em) {
+  article section {
+    column-count: 3;
+  }
+}
+@media screen and (min-width: 64em) {
+  article section {
+    column-count: 4;
+  }
+}
+
+/*# sourceMappingURL=main.css.map */

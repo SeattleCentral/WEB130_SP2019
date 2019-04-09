@@ -1,9 +1,11 @@
 @import 'colors';
 @import 'buttons';
+@import 'sizer';
 
 .pumpkin {
     font-size: 15rem;
 }
+
 body {
     background-color: $dark;
 }
@@ -18,3 +20,16 @@ main {
     }
 }
 
+article {
+    color: $white;
+    font-size: 2.2em;
+    text-align: right;
+    @include sizer(small) {
+        text-align: left;
+        font-size: 1.3em;
+    }
+    @include sizer(medium) {
+        text-align: center;
+        font-size: 2em;
+    }
+}
