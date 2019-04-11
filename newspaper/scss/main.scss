@@ -1,17 +1,22 @@
 @import 'sizer';
 
 article {
-    section {
+    div {
         p:first-child {
             margin-top: 0;
         }
         column-count: 1;
         @include sizer(medium) {
             column-count: 3;
+            color: pink;
         }
         @include sizer(large) {
             column-count: 4;
         }
     }
 }
-        
+
+cite {
+    display: block;
+    margin-top: 20px;
+}

@@ -1,18 +1,24 @@
-article section {
+article div {
   column-count: 1;
 }
-article section p:first-child {
+article div p:first-child {
   margin-top: 0;
 }
 @media screen and (min-width: 40em) and (max-width: 63.99em) {
-  article section {
+  article div {
     column-count: 3;
+    color: pink;
   }
 }
 @media screen and (min-width: 64em) {
-  article section {
+  article div {
     column-count: 4;
   }
+}
+
+cite {
+  display: block;
+  margin-top: 20px;
 }
 
 /*# sourceMappingURL=main.css.map */
