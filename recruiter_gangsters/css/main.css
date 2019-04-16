@@ -1,42 +1,26 @@
 main {
   margin: 20px;
   width: calc(100% - 40px);
+  display: flex;
+  flex-flow: row wrap;
+  align-items: stretch;
+  justify-content: space-around;
 }
 main article {
   border: 1px solid #333;
   padding: 15px;
-  box-sizing: border-box;
-  width: 100%;
-  margin-top: 10px;
+  width: 250px;
+  flex: 1;
 }
-@media screen and (min-width: 40em) and (max-width: 63.99em) {
-  main article {
-    float: left;
-    width: calc(50% - 5px);
-  }
-  main article:nth-child(even) {
-    margin-left: 10px;
-  }
-  main article:nth-child(even):after {
-    content: " ";
-    clear: both;
-  }
+
+div {
+  display: flex;
+  justify-content: flex-end;
 }
-@media screen and (min-width: 64em) {
-  main article {
-    float: left;
-    width: calc(33.333% - 6.66px);
-  }
-  main article:nth-child(3n+2) {
-    margin-left: 10px;
-  }
-  main article:nth-child(3n) {
-    margin-left: 10px;
-  }
-  main article:nth-child(3n):after {
-    content: " ";
-    clear: both;
-  }
+
+.small {
+  border: 1px solid #333;
+  padding: 15px;
 }
 
 /*# sourceMappingURL=main.css.map */
