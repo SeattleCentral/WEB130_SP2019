@@ -1,0 +1,53 @@
+@import 'sizer'
+
+
+.clearfix-lg
+    display: none
+    @include sizer(large)
+        display: block
+        clear: both
+        content: " "
+        
+.clearfix-md
+    display: none
+    @include sizer(medium)
+        display: block
+        clear: both
+        content: " "
+
+main
+    margin: 20px
+    width: calc(100% - 40px)
+    article
+        border: 1px solid #333
+        padding: 15px
+        box-sizing: border-box
+        width: 100%
+        margin-top: 10px
+        @include sizer(medium)
+            float: left
+            width: calc(50% - 5px)  // 5px = 10px / 2
+            &:nth-child(even)
+                margin-left: 10px
+                // &:after
+                    // this doesn't work because of https://developer.mozilla.org/en-US/docs/Web/CSS/::after
+                    // content: " "
+                    // clear: both
+                    // display: table
+            // &:nth-child(odd)
+            //     clear: left
+        @include sizer(large)
+            float: left
+            width: calc(33.333% - 6.66px)  // 6.66px = (10px + 10px) / 3
+            &:nth-child(3n + 2)
+                margin-left: 10px
+            &:nth-child(3n)
+                margin-left: 10px
+                
+            
+// nth-child grid           
+// 1 2 3
+// 4 5 6
+// 7 8 9
+// Select these with (3n + 2):
+// 2, 5, 8
