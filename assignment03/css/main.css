@@ -1,0 +1,10 @@
+.mobile-only {
+  display: block;
+}
+@media screen and (min-width: 600px) {
+  .mobile-only {
+    display: none;
+  }
+}
+
+/*# sourceMappingURL=main.css.map */

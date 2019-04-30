@@ -1,8 +1,26 @@
 $primary: #c122c1
+@import 'sizer'
 
 $theme-colors: ("primary": $primary)
 
-@import "../node_modules/bootstrap/scss/bootstrap.scss"
+// @import "../node_modules/bootstrap/scss/bootstrap"
+
+.row
+    display: flex
+    flex-wrap: wrap
+
+@for $i from 1 through 12
+    .col-sm-#{$i}
+        @include sizer(small)
+            flex: $i 100px
+    .col-md-#{$i}
+        @include sizer(medium)
+            // float: left
+            // width: percentage(($i/12))
+            flex: $i 100px
+    .col-lg-#{$i}
+        @include sizer(large)
+            flex: $i 100px
 
 h1
     color: $primary
