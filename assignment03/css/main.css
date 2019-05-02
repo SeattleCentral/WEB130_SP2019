@@ -7,4 +7,24 @@
   }
 }
 
+#hamburger {
+  display: inline-block;
+  width: 18px;
+  height: 18px;
+  background-image: url("../img/Hamburger.png");
+  background-size: cover;
+}
+
+li {
+  background-color: #2DA9FF;
+  padding: 4px;
+}
+
+ul.closed li {
+  display: none;
+}
+ul.closed li:first-child {
+  display: block;
+}
+
 /*# sourceMappingURL=main.css.map */
