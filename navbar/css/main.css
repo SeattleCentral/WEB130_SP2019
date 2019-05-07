@@ -9655,5 +9655,13 @@ h3 {
     border-color: #dee2e6;
   }
 }
+h2 {
+  margin-top: 20px;
+  margin-bottom: 30px;
+}
+
+.align-right {
+  text-align: right;
+}
 
 /*# sourceMappingURL=main.css.map */
