@@ -9664,4 +9664,10 @@ h2 {
   text-align: right;
 }
 
+@media screen and (max-width: 39.99em) {
+  .save-button {
+    width: 100%;
+  }
+}
+
 /*# sourceMappingURL=main.css.map */

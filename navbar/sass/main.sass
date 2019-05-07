@@ -1,4 +1,5 @@
 @import '../node_modules/bootstrap/scss/bootstrap'
+@import 'sizer'
 
 h2
     margin-top: 20px
@@ -6,3 +7,7 @@ h2
     
 .align-right
     text-align: right
+
+.save-button
+    @include sizer(small)
+        width: 100%

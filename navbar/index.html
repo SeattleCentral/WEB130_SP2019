@@ -82,7 +82,10 @@
                 <label for="title">
                     Title
                 </label>
-                <input type="text" id="title" name="title" class="form-control is-invalid" />
+                <input type="text" id="title" name="title" class="form-control" />
+                <div class="invalid-feedback">
+                    Title must be at least 2 characters long.
+                </div>
             </div>
             
             <div class="form-row">
@@ -110,7 +113,7 @@
             </div>
 
             <div class="align-right">
-                <button class="btn btn-primary">
+                <button class="btn btn-primary save-button">
                     Save
                 </button>
             </div>
@@ -122,5 +125,6 @@
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script type="text/javascript" src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="js/main.js"></script>
 </body>
 </html>
