@@ -5,6 +5,10 @@
 //     $(clickedEl).css('color', 'pink');
 // })
 
+import { greeter } from './other'
+
+setTimeout(greeter, 3000)
+
 $('#menu').on('click', (event) => {
     if ($('#menu > ul').hasClass('closed')) {
         $('#menu > ul').removeClass('closed')
