@@ -59,12 +59,8 @@ gulp.task('default', gulp.parallel(['watch-sass', 'watch-js']))
 
 gulp.task('new-default', gulp.parallel(() => {
     browserSync.init({
-        notify: false,
-        proxy: 'localhost:8080',
-        ui: {
-            port: 8080
-        },
-        open: false
+        server: './',
+        port: 8080
     })
 }, 'watch-sass', 'watch-js'))
 

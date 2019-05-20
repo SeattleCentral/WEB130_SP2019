@@ -1,5 +1,5 @@
 let greeter = () => {
-    alert('now what?!')
+    alert('yippie?!')
 }
 
 export { greeter }

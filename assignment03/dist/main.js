@@ -2,11 +2,11 @@
     'use strict';
 
     var greeter = function greeter() {
-      alert('now what?!');
+      alert('yippie?!');
     };
 
     /* global $ */
-    setTimeout(greeter, 3000);
+    setTimeout(greeter, 1000);
     $('#menu').on('click', function (event) {
       if ($('#menu > ul').hasClass('closed')) {
         $('#menu > ul').removeClass('closed');
