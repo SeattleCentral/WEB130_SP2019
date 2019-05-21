@@ -1,5 +1,7 @@
+/* global $ */
+
 let greeter = () => {
-    alert('yippie?!')
+    $('h1').html('La la la?!')
 }
 
 export { greeter }

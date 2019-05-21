@@ -1,10 +1,5 @@
 /* global $ */
 
-// $('li a').on('click', function(event) {
-//     const clickedEl = event.target
-//     $(clickedEl).css('color', 'pink');
-// })
-
 import { greeter } from './other'
 
 setTimeout(greeter, 1000)

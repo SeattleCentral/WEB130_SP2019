@@ -1,8 +1,9 @@
 (function () {
     'use strict';
 
+    /* global $ */
     var greeter = function greeter() {
-      alert('yippie?!');
+      $('h1').html('La la la?!');
     };
 
     /* global $ */
