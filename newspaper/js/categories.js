@@ -9,7 +9,6 @@ const Category = {
 const renderMenuItems = () => {
     let html = ''
     for (let category in Category) {
-        console.log(category)
         html += `
             <a class="dropdown-item" href="?filter=${category}">
                 ${category}

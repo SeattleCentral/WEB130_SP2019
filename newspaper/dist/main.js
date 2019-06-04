@@ -4,15 +4,19 @@
     /* global $ */
     var listArticlesQL = "\n    query {\n        articles {\n            id\n            title\n            category\n            published\n            author {\n            name\n            }\n            content {\n                html\n            }\n        }\n    }\n";
 
+    var filteredArticlesQL = function filteredArticlesQL(filter) {
+      return "\n    query {\n        articles(where:{ category: ".concat(filter, " }) {\n            id\n            title\n            category\n            published\n            author {\n            name\n            }\n            content {\n                html\n            }\n        }\n    }\n");
+    };
+
     var renderArticle = function renderArticle(data) {
       return "\n        <article class=\"col-md-6\">\n            <h2>".concat(data.title, "</h2>\n            <small>Published on: ").concat(data.published, "</small>\n            <div>\n                ").concat(data.content.html, "\n            </div>\n            <a href=\"?article=").concat(data.id, "\">Read More</a>\n        </article>\n    ");
     };
 
-    var loadArticlesList = function loadArticlesList() {
+    var loadArticles = function loadArticles(query) {
       $.post({
         url: 'https://api-uswest.graphcms.com/v1/cjvx3xdjrb7px01ghu7z3xxtf/master',
         data: JSON.stringify({
-          "query": listArticlesQL
+          "query": query
         }),
         success: function success(response) {
           var articles = response.data.articles;
@@ -45,6 +49,14 @@
         },
         contentType: 'application/json'
       });
+    };
+
+    var loadArticlesList = function loadArticlesList() {
+      return loadArticles(listArticlesQL);
+    };
+
+    var loadFilteredArticlesList = function loadFilteredArticlesList(filter) {
+      return loadArticles(filteredArticlesQL(filter));
     };
 
     /* global $ */
@@ -84,7 +96,6 @@
       var html = '';
 
       for (var category in Category) {
-        console.log(category);
         html += "\n            <a class=\"dropdown-item\" href=\"?filter=".concat(category, "\">\n                ").concat(category, "\n            </a>\n        ");
       }
 
@@ -107,11 +118,18 @@
     renderMenuItems();
     var params = new URLSearchParams(window.location.search);
 
-    if (params.get('article') !== null) {
-      var id = params.get('article');
-      loadArticle(id);
-    } else {
-      loadArticlesList();
-    }
+    if (typeof js_page !== 'undefined' && js_page === 'articles') {
+      // Only run on the articles pages.
+      if (params.get('article') !== null) {
+        var id = params.get('article');
+        loadArticle(id);
+      } else if (params.get('filter') !== null) {
+        loadFilteredArticlesList(params.get('filter'));
+      } else {
+        loadArticlesList();
+      }
+    } else if (typeof js_page !== 'undefined' && js_page === 'login') {
+      alert('You are on the login page!');
+    } // nvm alias default 10.15.3
 
 }());
