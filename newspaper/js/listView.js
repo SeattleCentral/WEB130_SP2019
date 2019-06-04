@@ -34,13 +34,15 @@ const filteredArticlesQL = (filter) => `
     }
 `
 
-const renderArticle = (data) => {
+const renderArticle = (data, col=6) => {
     return `
-        <article class="col-md-6">
-            <h2>${data.title}</h2>
-            <small>Published on: ${data.published}</small>
-            <div>
-                ${data.content.html}
+        <article class="col-md-${col}">
+            <div class="list-article">
+                <h2>${data.title}</h2>
+                <small>Published on: ${data.published}</small>
+                <div>
+                    ${data.content.html}
+                </div>
             </div>
             <a href="?article=${data.id}">Read More</a>
         </article>
@@ -55,6 +57,10 @@ const loadArticles = (query) => {
             success: (response) => {
                 const articles = response.data.articles
                 let html = ''
+                let firstArticle = articles.shift()
+                html += renderArticle(firstArticle, 8)
+                let secondArticle = articles.shift()
+                html += renderArticle(secondArticle, 4)
                 for (let article of articles) {
                     html += renderArticle(article)
                 }

@@ -9,7 +9,8 @@
     };
 
     var renderArticle = function renderArticle(data) {
-      return "\n        <article class=\"col-md-6\">\n            <h2>".concat(data.title, "</h2>\n            <small>Published on: ").concat(data.published, "</small>\n            <div>\n                ").concat(data.content.html, "\n            </div>\n            <a href=\"?article=").concat(data.id, "\">Read More</a>\n        </article>\n    ");
+      var col = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 6;
+      return "\n        <article class=\"col-md-".concat(col, "\">\n            <div class=\"list-article\">\n                <h2>").concat(data.title, "</h2>\n                <small>Published on: ").concat(data.published, "</small>\n                <div>\n                    ").concat(data.content.html, "\n                </div>\n            </div>\n            <a href=\"?article=").concat(data.id, "\">Read More</a>\n        </article>\n    ");
     };
 
     var loadArticles = function loadArticles(query) {
@@ -21,6 +22,10 @@
         success: function success(response) {
           var articles = response.data.articles;
           var html = '';
+          var firstArticle = articles.shift();
+          html += renderArticle(firstArticle, 8);
+          var secondArticle = articles.shift();
+          html += renderArticle(secondArticle, 4);
           var _iteratorNormalCompletion = true;
           var _didIteratorError = false;
           var _iteratorError = undefined;
