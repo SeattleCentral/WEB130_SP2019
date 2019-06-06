@@ -2,7 +2,7 @@
     'use strict';
 
     /* global $ */
-    var listArticlesQL = "\n    query {\n        articles {\n            id\n            title\n            category\n            published\n            author {\n            name\n            }\n            content {\n                html\n            }\n        }\n    }\n";
+    var listArticlesQL = "\n    query {\n        articles {\n            id\n            title\n            category\n            published\n            author {\n                name\n            }\n            content {\n                html\n            }\n        }\n    }\n";
 
     var filteredArticlesQL = function filteredArticlesQL(filter) {
       return "\n    query {\n        articles(where:{ category: ".concat(filter, " }) {\n            id\n            title\n            category\n            published\n            author {\n            name\n            }\n            content {\n                html\n            }\n        }\n    }\n");
@@ -22,10 +22,17 @@
         success: function success(response) {
           var articles = response.data.articles;
           var html = '';
-          var firstArticle = articles.shift();
-          html += renderArticle(firstArticle, 8);
-          var secondArticle = articles.shift();
-          html += renderArticle(secondArticle, 4);
+
+          if (articles.length) {
+            var firstArticle = articles.shift();
+            html += renderArticle(firstArticle, 8);
+          }
+
+          if (articles.length) {
+            var secondArticle = articles.shift();
+            html += renderArticle(secondArticle, 4);
+          }
+
           var _iteratorNormalCompletion = true;
           var _didIteratorError = false;
           var _iteratorError = undefined;
@@ -133,8 +140,6 @@
       } else {
         loadArticlesList();
       }
-    } else if (typeof js_page !== 'undefined' && js_page === 'login') {
-      alert('You are on the login page!');
     } // nvm alias default 10.15.3
 
 }());

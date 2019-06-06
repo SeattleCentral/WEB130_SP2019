@@ -18,10 +18,7 @@ if (typeof js_page !== 'undefined' && js_page === 'articles') {
     } else {
         loadArticlesList()
     }
-} else if (typeof js_page !== 'undefined' && js_page === 'login') {
-    alert('You are on the login page!')
 }
-
 
 
 

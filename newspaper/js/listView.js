@@ -8,7 +8,7 @@ const listArticlesQL = `
             category
             published
             author {
-            name
+                name
             }
             content {
                 html
@@ -57,10 +57,14 @@ const loadArticles = (query) => {
             success: (response) => {
                 const articles = response.data.articles
                 let html = ''
-                let firstArticle = articles.shift()
-                html += renderArticle(firstArticle, 8)
-                let secondArticle = articles.shift()
-                html += renderArticle(secondArticle, 4)
+                if (articles.length) {
+                    let firstArticle = articles.shift()
+                    html += renderArticle(firstArticle, 8)
+                }
+                if (articles.length) {
+                    let secondArticle = articles.shift()
+                    html += renderArticle(secondArticle, 4)
+                }
                 for (let article of articles) {
                     html += renderArticle(article)
                 }
