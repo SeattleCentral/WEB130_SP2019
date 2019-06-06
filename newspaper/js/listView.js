@@ -1,4 +1,5 @@
 /* global $ */
+import moment from 'moment'
 
 const listArticlesQL = `
     query {
@@ -35,11 +36,12 @@ const filteredArticlesQL = (filter) => `
 `
 
 const renderArticle = (data, col=6) => {
+    const dateView = new moment(data.published).format('MM/DD/YYYY hh:mm A')
     return `
         <article class="col-md-${col}">
             <div class="list-article">
                 <h2>${data.title}</h2>
-                <small>Published on: ${data.published}</small>
+                <small>Published on: ${dateView}</small>
                 <div>
                     ${data.content.html}
                 </div>

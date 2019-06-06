@@ -3,6 +3,8 @@ const sass = require('gulp-sass')
 const sourcemaps = require('gulp-sourcemaps')
 const eslint = require('gulp-eslint')
 const rollup = require('gulp-better-rollup')
+const resolve = require('rollup-plugin-node-resolve')
+const commonjs = require('rollup-plugin-commonjs')
 const babel = require('rollup-plugin-babel')
 const browserSync = require('browser-sync').create()
 
@@ -36,6 +38,15 @@ gulp.task('rollup', () => {
     return gulp.src('./js/start.js')
     .pipe(rollup({
         plugins: [
+            resolve({
+                jsnext: true,
+                main: true,
+                module: true
+            }),
+            commonjs({
+                include: './node_modules/**',
+                browser: true
+            }),
             babel({
                 exclude: './node_modules',
                 presets: [
