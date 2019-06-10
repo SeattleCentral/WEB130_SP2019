@@ -1,10 +1,12 @@
-/* global URLSearchParams */
+/* global URLSearchParams $ js_page */
 
 import { loadArticlesList, loadFilteredArticlesList } from './listView'
 import { loadArticle } from './detailView'
 import { renderMenuItems } from './categories'
+import { login, createArticle } from './api'
 
 renderMenuItems()
+export const global = {}
 
 let params = new URLSearchParams(window.location.search)
 
@@ -20,7 +22,10 @@ if (typeof js_page !== 'undefined' && js_page === 'articles') {
     }
 }
 
+if (typeof js_page !== 'undefined' && js_page === 'login') {
+    login()
+}
 
-
-
-// nvm alias default 10.15.3
+if (typeof js_page !== 'undefined' && js_page === 'createArticle') {
+    createArticle()
+}

@@ -1,8 +1,12 @@
-/* global URLSearchParams */
+/* global URLSearchParams $ js_page */
 
 import { loadArticlesList, loadFilteredArticlesList } from './listView'
 import { loadArticle } from './detailView'
 import { renderMenuItems } from './categories'
+import { login } from './api'
+import crypto from 'crypto'
+import path from 'path'
+export { path, crypto }
 
 renderMenuItems()
 
@@ -21,6 +25,3 @@ if (typeof js_page !== 'undefined' && js_page === 'articles') {
 }
 
 
-
-
-// nvm alias default 10.15.3

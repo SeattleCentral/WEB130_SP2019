@@ -7,6 +7,12 @@ const resolve = require('rollup-plugin-node-resolve')
 const commonjs = require('rollup-plugin-commonjs')
 const babel = require('rollup-plugin-babel')
 const browserSync = require('browser-sync').create()
+const json = require('rollup-plugin-json')
+const auth = require('basic-auth')
+const compare = require('tsscmp')
+const axios = require('axios')
+const creds = require('./../auth.json')
+const apiToken = require('./../apiToken')
 
 gulp.task('sass', () => {
     return gulp.src('./sass/main.sass')
@@ -38,6 +44,7 @@ gulp.task('rollup', () => {
     return gulp.src('./js/start.js')
     .pipe(rollup({
         plugins: [
+            json(),
             resolve({
                 jsnext: true,
                 main: true,
@@ -67,10 +74,82 @@ gulp.task('watch-js', () => {
     ], gulp.series('lint', 'rollup')).on('change', browserSync.reload)
 })
 
+const check = (name, pass) => {
+    if (creds[name] && compare(pass, creds[name])) {
+        return true
+    }
+    return false
+}
+
 gulp.task('default', gulp.parallel(() => {
     browserSync.init({
         server: './',
-        port: 8080
+        port: 8080,
+        middleware: [
+            {
+                route: "/api/login",
+                handle: function (req, res, next) {
+                    const credentials = auth(req)
+                    if (credentials && check(credentials.name, credentials.pass)) {
+                        res.end(JSON.stringify({
+                            status: 'SUCCESS'
+                        }))
+                    } else {
+                        res.end(JSON.stringify({
+                            status: 'ERROR'
+                        }))
+                    }
+                }
+            },
+            {
+                route: "/api/form",
+                handle: function (req, res, next) {
+                    const credentials = auth(req)
+                    let jsonData = null
+                    let jsonString = ''
+                    req.on('data', (data) => {
+                        jsonString += data
+                    });
+                    req.on('end', function() {
+                        jsonData = JSON.parse(jsonString);
+                        if (credentials && check(credentials.name, credentials.pass)) {
+                            axios.post(
+                                'https://api-uswest.graphcms.com/v1/cjvx3xdjrb7px01ghu7z3xxtf/master',
+                                jsonData,
+                                {
+                                    headers: {
+                                        Authorization: `Bearer ${apiToken}`
+                                    }
+                                }
+                            ).then((response) => {
+                                if (response.data.errors) {
+                                    console.log(response.data.errors)
+                                    res.end(JSON.stringify({
+                                        status: 'ERROR',
+                                        reason: 'Bad request: ' + response.data.errors[0].message
+                                    }))
+                                } else {
+                                    res.end(JSON.stringify({
+                                        status: 'SUCCESS'
+                                    }))
+                                }
+                            }).catch((error) => {
+                                console.log(error)
+                                res.end(JSON.stringify({
+                                    status: 'ERROR',
+                                    reason: 'Bad request.'
+                                }))
+                            })
+                        } else {
+                            res.end(JSON.stringify({
+                                status: 'ERROR',
+                                reason: 'Invalid credentials.'
+                            }))
+                        }
+                    });
+                }
+            }
+        ]
     })
 }, 'watch-sass', 'watch-js'))
 
@@ -81,21 +160,3 @@ gulp.task('default', gulp.parallel(() => {
 
 
 
-
-// const rollup = require('gulp-better-rollup')
-// const babel = require('rollup-plugin-babel')
-
-// gulp.task('rollup', () => {
-//     return gulp.src('./js/main.js')
-//     .pipe(rollup({
-//         plugins: [
-//             babel({
-//                 exclude: './node_modules',
-//                 presets: ['@babel/preset-env']
-//             })    
-//         ]
-//     }, {
-//         format: 'iife'
-//     }))
-//     .pipe(gulp.dest('./dist/'))
-// })

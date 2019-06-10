@@ -3,3 +3,6 @@ CodeReview
 assignment02
 node_modules
 yarn.lock
+yarn-error.log
+apiToken.js
+auth.json
